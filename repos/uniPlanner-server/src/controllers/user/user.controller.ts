@@ -61,7 +61,7 @@ export class UserController {
             Logger.log('Got request to get user data from collection');
             Logger.log(query);
             const user: User[] = await this.mongoService.UserExist("users", query.username) as any;
-            return user; 
+            return user;
         } catch (error) {
             Logger.error(`Failed getting user by name ${query.username}, error: ${error}`)
             throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);

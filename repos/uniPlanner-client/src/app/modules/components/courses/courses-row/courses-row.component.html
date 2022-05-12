@@ -1,20 +1,43 @@
-<div *ngIf="this.curriculumDetails">
-    <div fxLayout="row" fxLayoutGap="5px">
-        <input matInput placeholder="סמסטר" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Semester'>
-        <input matInput placeholder="שנה"  type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Year'>
-        <input matInput placeholder="מספר קורס"  type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Course_number'>
+<ng-container *ngIf="this.curriculumDetails">
+    <th>
+        <input matInput placeholder="סמסטר" type="number" ng-pattern="/^[0-9]+$/"
+            [(ngModel)]='this.curriculumDetails.Semester'>
+    </th>
+    <th>
+        <input matInput placeholder="שנה" type="number" ng-pattern="/^[0-9]+$/"
+            [(ngModel)]='this.curriculumDetails.Year'>
+    </th>
+    <th>
+        <input matInput placeholder="מספר קורס" type="number" ng-pattern="/^[0-9]+$/"
+            [(ngModel)]='this.curriculumDetails.Course_number'>
+    </th>
+    <th>
         <div>
             <input type="text" matInput [formControl]="coursesControl" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of filteredOptions | async" (onSelectionChange)="choosedCourse(option)" [value]="option">
+                <mat-option *ngFor="let option of filteredOptions | async" (onSelectionChange)="choosedCourse(option)"
+                    [value]="option">
                     {{option.Name}}
                 </mat-option>
             </mat-autocomplete>
         </div>
-        <input matInput placeholder="נקז" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Points'>
-        <input matInput placeholder="רמה" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Level'>
-        <input matInput placeholder="ציון" type="number" ng-pattern="/^[0-9]+$/"  [(ngModel)]='this.curriculumDetails.Grade'>
-        <input matInput placeholder="סטטוס"  [(ngModel)]='this.curriculumDetails.Status'>
-        <input matInput placeholder="סוג"  [(ngModel)]='this.curriculumDetails.Type'>   
-    </div>
-</div>
+    </th>
+    <th>
+        <input matInput placeholder="נקז" type="number" ng-pattern="/^[0-9]+$/"
+            [(ngModel)]='this.curriculumDetails.Points'>
+    </th>
+    <th>
+        <input matInput placeholder="רמה" type="number" ng-pattern="/^[0-9]+$/"
+            [(ngModel)]='this.curriculumDetails.Level'>
+    </th>
+    <th>
+        <input matInput placeholder="ציון" type="number" ng-pattern="/^[0-9]+$/"
+            [(ngModel)]='this.curriculumDetails.Grade'>
+    </th>
+    <th>
+        <input matInput placeholder="סטטוס" [(ngModel)]='this.curriculumDetails.Status'>
+    </th>
+    <th>
+        <input matInput placeholder="סוג" [(ngModel)]='this.curriculumDetails.Type'>
+    </th>
+</ng-container>
