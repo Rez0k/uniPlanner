@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -27,6 +28,7 @@ import { AddCourseRowComponent } from './modules/components/courses/add-course-r
 import { RegisterComponent } from './modules/components/register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SettingsComponent } from './modules/components/settings/settings.component';
+import { NavbarComponent } from './modules/components/navbar/navbar.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -46,7 +48,8 @@ const routes: Routes = [
     UserComponent,
     AddCourseRowComponent,
     RegisterComponent,
-    SettingsComponent
+    SettingsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ const routes: Routes = [
     MatAutocompleteModule,
     MatFormFieldModule,
     FormsModule,
+    MatToolbarModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     MatDialogModule,
