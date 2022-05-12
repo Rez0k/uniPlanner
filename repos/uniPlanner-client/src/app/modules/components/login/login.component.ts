@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   public user: User = {
     username: '',
@@ -15,11 +16,14 @@ export class LoginComponent implements OnInit {
   };
   public loginValid: boolean = true;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private route: Router) {
 
   }
 
   public ngOnInit(): void {
+  }
+
+  public ngOnDestroy(): void {
   }
 
   /**
@@ -34,6 +38,7 @@ export class LoginComponent implements OnInit {
     //start checking is user is valid
     if(this.user.username && this.user.password) {
   		this.loginService.validateLogin(this.user).subscribe(result => {
+        this.route.navigate(['courses-table']);
         this.loginValid = true;
         console.log('result is ', result);
 
@@ -41,8 +46,13 @@ export class LoginComponent implements OnInit {
         this.loginValid = false;
         console.log('error is ', error);
       });
-  	} else {
-  		alert('enter username and password');
   	}
+  }
+
+  /**
+   * going to register page
+   */
+  public toRegister(): void {
+    this.route.navigate(['register']);
   }
 }

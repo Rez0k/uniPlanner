@@ -24,7 +24,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SettingsComponent } from './modules/components/settings/settings.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent }
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({
