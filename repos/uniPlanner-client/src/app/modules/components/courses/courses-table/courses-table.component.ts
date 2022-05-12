@@ -31,7 +31,7 @@ export class CoursesTableComponent implements OnInit {
     'סוג'
   ];
 
-  constructor(readonly coursesService: CoursesService, public dialog: MatDialog) { }
+  constructor(readonly coursesService: CoursesService) { }
 
   ngOnInit(): void {
     this.coursesSubscription = this.coursesService.getAllCourses()
@@ -79,10 +79,6 @@ export class CoursesTableComponent implements OnInit {
       Status: '',
       UserName: '',
     });
-  }
-
-  openDialog() {
-    this.dialog.open(CourseModalComponent);
   }
 
   ngOnDestroy() {
