@@ -21,6 +21,7 @@ import { CoursesTableComponent } from './modules/components/courses/courses-tabl
 import { CoursesRowComponent } from './modules/components/courses/courses-row/courses-row.component';
 import { RegisterComponent } from './modules/components/register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SettingsComponent } from './modules/components/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent }
@@ -33,7 +34,8 @@ const routes: Routes = [
     CoursesRowComponent,
     LoginComponent,
     UserComponent,
-    RegisterComponent
+    RegisterComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
