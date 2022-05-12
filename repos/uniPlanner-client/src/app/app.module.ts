@@ -4,8 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoursesTableComponent } from './modules/components/courses/courses-table/courses-table.component';
+
 import { RouterModule, Routes } from '@angular/router';
+import { CoursesTableComponent } from './modules/components/courses/courses-table/courses-table.component';
 
 const routes: Routes = [
   { path: '', component: CoursesTableComponent }
@@ -20,7 +21,7 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]
