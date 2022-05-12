@@ -14,17 +14,19 @@ import { CurriculumDetailsModel } from 'src/app/modules/models/curriculumDetails
   styleUrls: ['./courses-row.component.scss']
 })
 export class CoursesRowComponent implements OnInit {
-  @Input() curriculumDetailsModel: CurriculumDetailsModel | undefined;
+  @Input() public curriculumDetails: CurriculumDetailsModel | undefined;
+
+  @Input() private options: Course[] = [];
 
   public coursesControl = new FormControl();
-  private options: Course[] = [];
+
   public filteredOptions: Observable<Course[]> | undefined;
 
   constructor() { }
 
   ngOnInit(): void 
   {    
-    this.curriculumDetailsModel = 
+    this.curriculumDetails = 
     {
       Semester:  0,
       Year: 0,
@@ -40,14 +42,13 @@ export class CoursesRowComponent implements OnInit {
 
     this.options = [
       {
-        Id: '',
-        CourseNumber: 0,
+        Id: '123',
+        CourseNumber: 64646,
         Name: 'uriel',
-        Points:  0,
-        Type:  '',
+        Points:  5,
+        Type:  'damn',
       }
     ];
-    console.log(this.options);
     
     this.filteredOptions = this.coursesControl.valueChanges.pipe(
       startWith(''),
@@ -63,11 +64,20 @@ export class CoursesRowComponent implements OnInit {
 
   private _filter(name: string): Course[] 
   {
-    console.log(name);
-
     const filterValue = name.toLowerCase();
 
     return this.options.filter(option => option.Name.toLowerCase().includes(filterValue));
   }
 
+  public choosedCourse(course: any)
+  {
+    if (!course || !this.curriculumDetails)
+    {
+      return;
+    }
+
+    this.curriculumDetails.Points = course.Points;
+    this.curriculumDetails.CourseNumber = course.CourseNumber;
+    this.curriculumDetails.Type = course.Type;
+  }
 }
