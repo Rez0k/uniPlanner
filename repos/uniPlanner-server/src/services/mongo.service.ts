@@ -4,9 +4,9 @@ import { MongoClient } from 'mongodb';
 @Injectable()
 export class MongoService {
 
-    mongo_client: MongoClient;
+    static mongo_client: MongoClient;
 
     saveItemByCollection(collection: string, item: any) {
-        
+        console.log(MongoService.mongo_client)
     }
 }

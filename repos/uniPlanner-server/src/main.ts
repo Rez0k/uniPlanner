@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { MongoClient } from 'mongodb';
 import { AppModule } from './app.module';
+import { MongoService } from './services/mongo.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +15,8 @@ async function bootstrap() {
 
     await client.db("uniplanner").command({ ping: 1 });
     console.log("Connected successfully to server");
+
+    MongoService.mongo_client = client; // Saving to global variable
   } catch (e) {
       console.error(e);
   } finally {
