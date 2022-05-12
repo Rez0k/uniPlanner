@@ -43,4 +43,16 @@ export class CurriculumController {
             throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Put('insert/:username')
+    async insertToCurriculumByName(@Param() username, @Body() curridata): Promise<string> {
+        try {
+            Logger.log('Put request to update curriculum data to collection');
+            await this.mongoService.insertToCurriculumByName("curriculum", username , curridata);
+            return `Curriculum ${curridata.username} updated successfully`;
+        } catch (error) {
+            Logger.error(`Failed to put data, error: ${error}`)
+            throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

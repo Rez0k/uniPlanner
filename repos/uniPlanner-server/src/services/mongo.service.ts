@@ -173,6 +173,29 @@ export class MongoService {
     }
   }
 
+  async UserExist(collection: string, user: string) {
+    try {
+      await MongoService.mongo_client.connect();
+
+      const result = await MongoService.mongo_client
+        .db('uniplanner').collection(collection).find({ username: user }).toArray();
+        Logger.log(result.length);
+      if (JSON.stringify(result) != "[]") {
+        Logger.debug(`Found a listing in the collection: '${collection}' with the name '${user}': ${result}`);
+        return true;
+      } else {
+        Logger.debug(`No listings found with the name '${user}'`);
+        return false;
+      }
+    } catch (error) {
+      Logger.error(
+        `Failed to get item from collection ${collection} with error: ${error}`,
+      );
+    } finally {
+      MongoService.mongo_client.close();
+    }
+  }
+
   //Curriculum handeling
   async getCurriculumByName(collection: string, name: string) {
     try {
@@ -207,6 +230,27 @@ export class MongoService {
         `${result.matchedCount} document(s) matched the query criteria.`,
       );
       Logger.debug(`${result.modifiedCount} document(s) was/were updated.`);
+    } catch (error) {
+      Logger.error(
+        `Failed to update item to collection ${collection} with error: ${error}`,
+      );
+    } finally {
+      MongoService.mongo_client.close();
+    }
+  }
+
+  async insertToCurriculumByName(collection: string, name: string, item: any) {
+    try {
+      await MongoService.mongo_client.connect();
+      const result = await MongoService.mongo_client
+        .db('uniplanner')
+        .collection(collection)
+        .find({ username: name , courses: item });
+        return result;
+      Logger.debug(
+        `${result} document(s) matched the query criteria.`,
+      );
+      Logger.debug(`${result} document(s) was/were updated.`);
     } catch (error) {
       Logger.error(
         `Failed to update item to collection ${collection} with error: ${error}`,
