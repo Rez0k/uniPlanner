@@ -3,6 +3,7 @@ import { CoursesRowComponent } from '../courses-row/courses-row.component';
 
 import { Course } from 'src/app/modules/models/course';
 import { CoursesService } from 'src/app/modules/services/courses.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class CoursesTableComponent implements OnInit {
 
   public curriculumDetails: any[] = [];
 
+  public coursesSubscription!: Subscription;
+
   public tableColumns: string[] = [
     'סמסטר', 
     'שנה', 
@@ -29,12 +32,11 @@ export class CoursesTableComponent implements OnInit {
     'סוג'
   ];
 
-
   constructor(readonly coursesService: CoursesService,) { }
 
   ngOnInit(): void 
   {
-    this.coursesService.getAllCourses()
+    this.coursesSubscription = this.coursesService.getAllCourses()
       .subscribe((rows: any) => this.courses = rows      );
 
     this.curriculumDetails=[
@@ -77,6 +79,10 @@ export class CoursesTableComponent implements OnInit {
       Type: '',
       Grade:  0,
       Status: '',
-      UserName:  'dsd',});
+      UserName:  '',});
+  }
+
+  ngOnDestroy() {
+    this.coursesSubscription?.unsubscribe();
   }
 }
