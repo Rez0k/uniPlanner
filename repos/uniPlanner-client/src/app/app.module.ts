@@ -32,7 +32,7 @@ const routes: Routes = [
     CoursesTableComponent,
     CoursesRowComponent,
     CoursesPageComponent,
-    CourseModalComponent
+    CourseModalComponent,
     LoginComponent,
     UserComponent
   ],
