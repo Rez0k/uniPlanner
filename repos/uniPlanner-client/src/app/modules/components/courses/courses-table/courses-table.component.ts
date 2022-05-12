@@ -47,7 +47,8 @@ export class CoursesTableComponent implements OnInit {
     this.coursesSubscription = this.coursesService.getAllCourses()
       .subscribe((rows: any) => this.courses = rows);
     this.curriculumGetSubscription = this.curriculumService.getCurriculumByUser(Consts.userName)
-      .subscribe((rows: any) => this.curriculumDetails = rows.courses);
+      .subscribe((rows: any) =>{ this.curriculumDetails = rows?.courses; console.log(rows);
+      });
   }
 
   public add()
@@ -65,9 +66,7 @@ export class CoursesTableComponent implements OnInit {
   }
 
   public save()
-  {
-    console.log(this.curriculumDetails);
-    
+  {    
     this.curriculumSubscription = this.curriculumService.postCurriculum(Consts.userName, this.curriculumDetails).subscribe();
   }
 

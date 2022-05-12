@@ -13,11 +13,13 @@ export class CurriculumService {
 
 	getCurriculumByUser(userName: string): Observable<any>
 	{    
-		return this.http.get(`${Consts.baseUrl}api/curriculum/${userName}`);
+		console.log(userName);
+		
+		return this.http.get(`${Consts.baseUrl}api/curriculum/search/${userName}`);
 	}
 
 	postCurriculum(userName: string, courses: any[]): Observable<any>
-	{    
+	{
 		return this.http.post(`${Consts.baseUrl}api/curriculum/insert`, {courses: courses, username: userName});
 	}
 }
