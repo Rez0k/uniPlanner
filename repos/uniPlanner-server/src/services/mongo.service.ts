@@ -1,7 +1,5 @@
 import { Logger, Injectable } from '@nestjs/common';
 import { MongoClient } from 'mongodb';
-import { BulkWriteResult } from 'mongoose/node_modules/mongodb';
-import { json } from 'stream/consumers';
 
 @Injectable()
 export class MongoService {

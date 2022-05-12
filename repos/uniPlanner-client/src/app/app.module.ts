@@ -15,8 +15,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
-import { CoursesPageComponent } from './modules/components/courses-page/courses-page.component';
-import { CourseModalComponent } from './modules/components/course-modal/course-modal.component';
+import { CoursesPageComponent } from './modules/components/courses/courses-page/courses-page.component';
+import { CourseModalComponent } from './modules/components/courses/course-modal/course-modal.component';
 import { LoginComponent } from './modules/components/login/login.component';
 import { UserComponent } from './modules/components/user/user.component';
 import { CoursesTableComponent } from './modules/components/courses/courses-table/courses-table.component';
