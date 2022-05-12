@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from 'src/app/modules/services/courses.service';
+import { CurriculumService } from 'src/app/modules/services/curriculum.service';
+
 import { Subscription } from 'rxjs';
+import { Consts } from 'src/app/modules/consts/consts';
 import { MatDialog } from '@angular/material/dialog';
 import { CourseModalComponent } from '../course-modal/course-modal.component';
 
@@ -19,6 +22,11 @@ export class CoursesTableComponent implements OnInit {
 
   public coursesSubscription!: Subscription;
 
+  public curriculumSubscription!: Subscription;
+  public curriculumGetSubscription!: Subscription;
+
+
+
   public tableColumns: string[] = [
     'סמסטר',
     'שנה',
@@ -31,43 +39,22 @@ export class CoursesTableComponent implements OnInit {
     'סוג'
   ];
 
-  constructor(readonly coursesService: CoursesService, public dialog: MatDialog) { }
+  constructor(readonly coursesService: CoursesService,
+              readonly curriculumService: CurriculumService,
+               public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.coursesSubscription = this.coursesService.getAllCourses()
       .subscribe((rows: any) => this.courses = rows);
-
-    this.curriculumDetails = [
-      {
-        Semester: 1,
-        Year: 2022,
-        Name: 'infi',
-        Course_number: 0,
-        Points: 0,
-        Level: 0,
-        Type: '',
-        Grade: 0,
-        Status: '',
-        UserName: '0',
-      },
-      {
-        Semester: 0,
-        Year: 0,
-        Name: '',
-        Course_number: 0,
-        Points: 0,
-        Level: 0,
-        Type: '',
-        Grade: 0,
-        Status: '',
-        UserName: 'dsd',
-      },
-    ]
-
+    this.curriculumGetSubscription = this.curriculumService.getCurriculumByUser(Consts.userName)
+      .subscribe((rows: any) =>{ this.curriculumDetails = rows?.courses || []; console.log(rows);
+      });
   }
 
   public add() {
-    this.curriculumDetails.push({
+    console.log("add");
+    
+    this.curriculumDetails?.push({
       Semester: 0,
       Year: 0,
       Name: '',
@@ -85,7 +72,14 @@ export class CoursesTableComponent implements OnInit {
     this.dialog.open(CourseModalComponent);
   }
 
+  public save()
+  {    
+    this.curriculumSubscription = this.curriculumService.postCurriculum(Consts.userName, this.curriculumDetails).subscribe();
+  }
+
   ngOnDestroy() {
     this.coursesSubscription?.unsubscribe();
+    this.curriculumSubscription?.unsubscribe();
+    this.curriculumGetSubscription?.unsubscribe();
   }
 }

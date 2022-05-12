@@ -11,14 +11,14 @@ import { Consts } from 'src/app/modules/consts/consts';
 })
 export class CoursesService {
 
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
-  getAllCourses(): Observable<any>
+	getAllCourses(): Observable<any>
 	{    
 		return this.http.get(`${Consts.baseUrl}api/courses/allCourses`);
 	}
 
-  postCourse(course: Course): Observable<any>
+	postCourse(course: Course): Observable<any>
 	{    
 		return this.http.post(`${Consts.baseUrl}api/courses/saveCourse`, course);
 	}
