@@ -24,9 +24,26 @@ export class RegisterComponent implements OnInit {
   public ngOnInit(): void {
   }
 
-  public onSubmit(): void {
+  /**
+   * @returns if user registerd
+   */
+  public onRegister(): void {
+    //if the user is undifined
+    if (!this.user){
+      return;
+    }
+    //start checking is user is valid
+    if(this.user.username && this.user.password) {
+  		this.loginService.register(this.user).subscribe(result => {
+        if (result) {
+          this.route.navigate(['login']);
+        }else{ console.log(":/")}
+      }, error => {
+        this.loginValid = false;
+        console.log('error is ', error);
+      });
+  	}
   }
-
   /**
    * direct to login page
    */

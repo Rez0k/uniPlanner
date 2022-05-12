@@ -29,8 +29,8 @@ import { SettingsComponent } from './modules/components/settings/settings.compon
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent},
-  { path: 'courses-page', component: CoursesPageComponent}
+  { path: 'register', component: RegisterComponent },
+  { path: 'courses-page', component: CoursesPageComponent }
 ];
 
 @NgModule({
