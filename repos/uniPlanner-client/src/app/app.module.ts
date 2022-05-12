@@ -24,7 +24,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     CoursesTableComponent,
-    CoursesRowComponent
+    CoursesRowComponent,
   ],
   imports: [
     BrowserModule,

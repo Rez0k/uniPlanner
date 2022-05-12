@@ -1,14 +1,16 @@
 <p>courses-table works!</p>
-
+<!-- 
 <table>
     <thead>
         <span *ngFor="let head of this.displayedColumns">
             {{head}}
         </span>
     </thead>
+    
     <tbody>
-            <td *ngFor="let column of this.displayedColumns">
-                Key: <b>{{course.column}}</b> Value: <b>{{course.column}}</b>
-            </td>
+        <td *ngFor="let row of coursesRows">
+            dsad
+            <app-courses-row [curriculumDetailsModel]="row"></app-courses-row>
+        </td>
     </tbody>
-</table>
+</table> -->
