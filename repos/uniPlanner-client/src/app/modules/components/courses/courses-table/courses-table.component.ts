@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesRowComponent } from '../courses-row/courses-row.component';
 
-import { Course } from 'src/app/modules/models/course';
 import { CoursesService } from 'src/app/modules/services/courses.service';
+import { CurriculumService } from 'src/app/modules/services/curriculum.service';
+
 import { Subscription } from 'rxjs';
+import { Consts } from 'src/app/modules/consts/consts';
 
 
 @Component({
@@ -20,6 +22,11 @@ export class CoursesTableComponent implements OnInit {
 
   public coursesSubscription!: Subscription;
 
+  public curriculumSubscription!: Subscription;
+  public curriculumGetSubscription!: Subscription;
+
+
+
   public tableColumns: string[] = [
     'סמסטר', 
     'שנה', 
@@ -32,40 +39,15 @@ export class CoursesTableComponent implements OnInit {
     'סוג'
   ];
 
-  constructor(readonly coursesService: CoursesService,) { }
+  constructor(readonly coursesService: CoursesService,
+              readonly curriculumService: CurriculumService) { }
 
   ngOnInit(): void 
   {
     this.coursesSubscription = this.coursesService.getAllCourses()
-      .subscribe((rows: any) => this.courses = rows      );
-
-    this.curriculumDetails=[
-      {
-        Semester:  1,
-        Year: 2022,
-        Name: 'infi',
-        Course_number: 0,
-        Points:  0,
-        Level:  0,
-        Type: '',
-        Grade:  0,
-        Status: '',
-        UserName:  '0',
-      },
-      {
-        Semester:  0,
-        Year: 0,
-        Name: '',
-        Course_number: 0,
-        Points:  0,
-        Level:  0,
-        Type: '',
-        Grade:  0,
-        Status: '',
-        UserName:  'dsd',
-      },
-    ]  
-
+      .subscribe((rows: any) => this.courses = rows);
+    this.curriculumGetSubscription = this.curriculumService.getCurriculumByUser(Consts.userName)
+      .subscribe((rows: any) => this.curriculumDetails = rows.courses);
   }
 
   public add()
@@ -82,7 +64,14 @@ export class CoursesTableComponent implements OnInit {
       UserName:  '',});
   }
 
+  public save()
+  {
+    this.curriculumSubscription = this.curriculumService.postCurriculum(Consts.userName, this.curriculumDetails).subscribe();
+  }
+
   ngOnDestroy() {
     this.coursesSubscription?.unsubscribe();
+    this.curriculumSubscription?.unsubscribe();
+    this.curriculumGetSubscription?.unsubscribe();
   }
 }
