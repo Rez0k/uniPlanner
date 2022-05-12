@@ -11,20 +11,25 @@ import { CoursesRowComponent } from './modules/components/courses/courses-row/co
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
+import { CoursesPageComponent } from './modules/components/courses-page/courses-page.component';
+import { CourseModalComponent } from './modules/components/course-modal/course-modal.component';
 
 const routes: Routes = [
-  { path: '', component: CoursesTableComponent }
+  { path: '', component: CoursesPageComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     CoursesTableComponent,
-    CoursesRowComponent
+    CoursesRowComponent,
+    CoursesPageComponent,
+    CourseModalComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    MatDialogModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
