@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button'
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,9 +22,15 @@ import { LoginComponent } from './modules/components/login/login.component';
 import { UserComponent } from './modules/components/user/user.component';
 import { CoursesTableComponent } from './modules/components/courses/courses-table/courses-table.component';
 import { CoursesRowComponent } from './modules/components/courses/courses-row/courses-row.component';
+import { RegisterComponent } from './modules/components/register/register.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { SettingsComponent } from './modules/components/settings/settings.component';
 
 const routes: Routes = [
-  { path: '', component: CoursesPageComponent }
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent},
+  { path: 'courses-page', component: CoursesPageComponent}
 ];
 
 @NgModule({
@@ -34,7 +41,9 @@ const routes: Routes = [
     CoursesPageComponent,
     CourseModalComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
+    RegisterComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +51,9 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MatCardModule,
     MatInputModule,
+    MatButtonModule,
     MatAutocompleteModule,
+    MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
