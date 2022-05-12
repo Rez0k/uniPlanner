@@ -9,7 +9,10 @@ import { LoginService } from '../../services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  public user: User | undefined;
+  public user: User = {
+    username: '',
+    password: ''
+  };
   public loginValid: boolean = true;
 
   constructor(private loginService: LoginService) {
