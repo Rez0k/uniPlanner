@@ -28,11 +28,8 @@ const routes: Routes = [
     AppComponent,
     CoursesTableComponent,
     CoursesRowComponent,
-<<<<<<< HEAD
-=======
     LoginComponent,
     UserComponent
->>>>>>> a547431378b9d4a62a53fac204c2e7a8cc5e05be
   ],
   imports: [
     BrowserModule,
