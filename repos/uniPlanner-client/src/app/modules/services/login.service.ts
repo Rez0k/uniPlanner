@@ -20,13 +20,12 @@ export class LoginService {
   }
 
   //register a new user to the db
+  checkValidRegister(user: User) {
+    return this.http.get(`${Consts.baseUrl}api/users/userValidate?username=${user.username}`)
+  }
+
+  //register a new user to the db
   register(user: User) {
-      //return this.http.post(`${config.apiUrl}/users/register`, user);
+    return this.http.post(`${Consts.baseUrl}api/users/saveUser`, user);
   }
-
-  //delete user from db
-  delete(id: number) {
-      //return this.http.delete(`${config.apiUrl}/users/${id}`);
-  }
-
 }

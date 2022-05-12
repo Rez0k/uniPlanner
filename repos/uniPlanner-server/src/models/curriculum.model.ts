@@ -1,5 +1,7 @@
+import { Course } from "./couese.model";
+
 export interface Curriculum {
     id: string;
-    courses: any;
+    courses: Course[];
     username: string;
 }
