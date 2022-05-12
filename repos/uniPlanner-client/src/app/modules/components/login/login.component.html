@@ -4,13 +4,13 @@
       <h2>Log In</h2>
       <!-- incoorect login -->
       <mat-error *ngIf="!loginValid">
-        The username and password were not recognized
+        The username and password were not recognized<br><br>
       </mat-error>
       <!-- USERNAME/MAIL INPUT -->
       <mat-form-field>
-        <input matInput placeholder="Email" [(ngModel)]="user!.username" name="username" required>
+        <input matInput placeholder="Username" [(ngModel)]="user!.username" name="username" required>
         <mat-error>
-          Please provide a valid email address
+          Please provide a valid username
         </mat-error>
       </mat-form-field>
       <!-- PASSWORD INPUT -->
@@ -19,8 +19,11 @@
         <mat-error>
           Please provide a valid password
         </mat-error>
-      </mat-form-field>
-      <button mat-raised-button color="primary">Login</button>
+      </mat-form-field><br>
+      <button mat-raised-button color="primary">Login</button> &nbsp;
+      <button mat-raised-button color="primary" (click)="toRegister()">
+        Register
+      </button>
     </form>
   </mat-card-content>
 </mat-card>

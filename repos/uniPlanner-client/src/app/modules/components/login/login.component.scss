@@ -8,10 +8,9 @@ mat-form-field {
   display: block;
 }
 
-#bg-image {
-  height: 650 px;
-  color: aquamarine;
-  background-image: url('https://wallpaperaccess.com/full/1567665.png');
-  background-size: 100%;
-  background-size: cover;
+.btn {
+  color : rgb(49, 46, 46);
+  background-color: rgba(255, 222, 121, 0.96);
+  border-radius: 10px 0 0 10px;
+  font-size: 16px;
 }
