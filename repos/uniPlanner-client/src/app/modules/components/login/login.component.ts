@@ -9,14 +9,18 @@ import { LoginService } from '../../services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  public user : User;
+  public user: User | undefined;
   public loginValid: boolean = true;
 
   constructor(private loginService: LoginService) {
-  	this.user = new User();
-  }
+
+   }
 
   public ngOnInit(): void {
+    this.user = {
+      username: "test",
+      password: "teset"
+    }
   }
 
   /**
@@ -24,7 +28,11 @@ export class LoginComponent implements OnInit {
    * sends a request to the server to check if the inputs are valid
    */
   public onSubmit(): void {
-    //send http to server to check if user and passwords are correct
+    //if the user is undifined
+    if (!this.user){
+      return;
+    }
+    //start checking is user is valid
     if(this.user.username && this.user.password) {
   		this.loginService.validateLogin(this.user).subscribe(result => {
         this.loginValid = true;

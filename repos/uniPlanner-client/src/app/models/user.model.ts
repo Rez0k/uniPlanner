@@ -1,8 +1,4 @@
-export class User {
-	constructor(){
-		this.username = '';
-		this.password = '';
-	}
-	public username;
-	public password;
+export interface User {
+	username: string;
+	password: string;
 }
