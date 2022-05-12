@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './modules/components/login/login.component';
+import { LoginService } from './modules/services/login.service';
+import { UserComponent } from './modules/components/user/user.component';
 
 const routes: Routes = [
   { path: '', component: CoursesTableComponent }
@@ -32,7 +35,8 @@ const routes: Routes = [
     AppComponent,
     UniversityDropdownComponent,
     CoursesTableComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -50,10 +54,14 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatSelectModule,
     MatOptionModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
-
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    LoginService
+   ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

@@ -7,3 +7,11 @@ mat-card {
 mat-form-field {
   display: block;
 }
+
+#bg-image {
+  height: 650 px;
+  color: aquamarine;
+  background-image: url('https://wallpaperaccess.com/full/1567665.png');
+  background-size: 100%;
+  background-size: cover;
+}
