@@ -66,6 +66,8 @@ export class CoursesTableComponent implements OnInit {
 
   public save()
   {
+    console.log(this.curriculumDetails);
+    
     this.curriculumSubscription = this.curriculumService.postCurriculum(Consts.userName, this.curriculumDetails).subscribe();
   }
 

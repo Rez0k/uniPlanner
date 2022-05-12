@@ -24,7 +24,6 @@ export class CoursesRowComponent implements OnInit {
 
   ngOnInit(): void
   {
-    console.log(this.courses);
     this.filteredOptions = this.coursesControl.valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.Name)),
@@ -51,6 +50,7 @@ export class CoursesRowComponent implements OnInit {
       return;
     }
 
+    this.curriculumDetails.Name = course.Name;
     this.curriculumDetails.Points = course.Points;
     this.curriculumDetails.Course_number = course.Course_number;
     this.curriculumDetails.Type = course.Type;

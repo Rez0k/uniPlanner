@@ -13,7 +13,11 @@
             <tr>
                 <th attr.colspan="{{ tableColumns.length }}" style="text-align: center">
                     <app-add-course-row (addEvent)="add()"></app-add-course-row>
-                    <button mat-raised-button (addEvent)="save()"></button>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <button mat-raised-button (click)="save()">שמירה</button>
                 </th>
             </tr>
         </tbody>
