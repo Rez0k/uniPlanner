@@ -55,4 +55,29 @@ export class UserController {
         }
     }
 
+    @Get('userValidate')
+    async UserExist(@Query() query: User): Promise<User[]> {
+        try {
+            Logger.log('Got request to get user data from collection');
+            Logger.log(query);
+            const user: User[] = await this.mongoService.UserExist("users", query.username) as any;
+            return user;
+        } catch (error) {
+            Logger.error(`Failed getting user by name ${query.username}, error: ${error}`)
+            throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Post('register')
+    async RegisterUser(@Body() userdata): Promise<string> {
+        try {
+            Logger.log('Post request to post user data to collection');
+            await this.mongoService.saveItemByCollection("users",  userdata);
+            return `User ${userdata.username} saved successfully`;
+        } catch (error) {
+            Logger.error(`Failed to post data, error: ${error}`)
+            throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
