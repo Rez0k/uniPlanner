@@ -17,7 +17,7 @@ export class MondayController {
     var FormData = require('form-data');
     var data = new FormData();
     data.append('query', '{ boards (limit:1) {id name} }');
-    
+
     var config = {
       method: 'post',
       url: 'https://api.monday.com/v2?Authorization=`&Type=application/json',
@@ -35,7 +35,7 @@ export class MondayController {
     catch(error){
       console.log(error);
     }
-    
+
     return result.data;
   }
 
