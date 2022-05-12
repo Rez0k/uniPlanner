@@ -1,1 +1,9 @@
-<p>university-dropdown works!</p>
+<h4>Select University</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Current University</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let university of universities" [value]="university.value">
+      {{university.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

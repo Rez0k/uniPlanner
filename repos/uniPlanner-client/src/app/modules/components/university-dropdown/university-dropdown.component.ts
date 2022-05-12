@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+interface University {//for the dropdown univeristy selection
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-university-dropdown',
   templateUrl: './university-dropdown.component.html',
@@ -11,5 +15,11 @@ export class UniversityDropdownComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  universities: University[] = [
+    {value: 'steak-0', viewValue: 'Ben-Gurion'},
+    {value: 'pizza-1', viewValue: 'Tel-Aviv'},
+    {value: 'tacos-2', viewValue: 'Technion'},
+  ];
 
 }
