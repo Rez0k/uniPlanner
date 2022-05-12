@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, HttpStatus, Logger } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Logger, Param, Post } from '@nestjs/common';
 import { Course } from 'src/models/couese.model';
 import { MongoService } from 'src/services/mongo.service';
 
@@ -7,19 +7,38 @@ export class CourseController {
 
     constructor(readonly mongoService: MongoService) {}
 
-    @Get('course')
-    getCourseById(): Course {
+    @Post('SaveCourse')
+    saveItemByCollection(@Body() course): string {
         try {
-            Logger.log('Got request to get data');
-            this.mongoService.saveItemByCollection("courses",  {
-                name: "Lovely Loft",
-                summary: "A charming loft in Paris",
-                bedrooms: 1,
-                bathrooms: 1
-            });
-            return  { id: 'sd', name: 'eran', status: 'In progress' };
+            Logger.log('Post request to post data');
+            this.mongoService.saveItemByCollection("courses",  course);
+            return `Course ${course.name} saved successfully`;
+        } catch (error) {
+            Logger.error(`Failed to post data, error: ${error}`)
+            throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Get('allcourses')
+    async getAllcourses(): Promise<Course[]> {
+        try {
+            Logger.log('Got request to get all data');
+            const courses: Course[] = await this.mongoService.getAllByCollection("courses") as any;
+            return courses;
         } catch (error) {
             Logger.error(`Failed getting course by id, error: ${error}`)
+            throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Get(':course_number')
+    async getCourseByNumber(@Param() params): Promise<Course[]> {
+        try {
+            Logger.log('Got request to get course data');
+            const courses: Course[] = await this.mongoService.getItemByCourseNumber("courses",params.course_number) as any;
+            return courses;
+        } catch (error) {
+            Logger.error(`Failed getting course by number ${params.course_number}, error: ${error}`)
             throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
