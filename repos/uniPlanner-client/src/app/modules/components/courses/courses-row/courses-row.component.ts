@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
@@ -24,9 +24,9 @@ export class CoursesRowComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void 
-  {    
-    this.curriculumDetails = 
+  ngOnInit(): void
+  {
+    this.curriculumDetails =
     {
       Semester:  0,
       Year: 0,
@@ -49,7 +49,7 @@ export class CoursesRowComponent implements OnInit {
         Type:  'damn',
       }
     ];
-    
+
     this.filteredOptions = this.coursesControl.valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.Name)),
@@ -57,12 +57,12 @@ export class CoursesRowComponent implements OnInit {
     );
   }
 
-  public displayFn(course: Course): string 
+  public displayFn(course: Course): string
   {
     return course && course.Name ? course.Name : '';
   }
 
-  private _filter(name: string): Course[] 
+  private _filter(name: string): Course[]
   {
     const filterValue = name.toLowerCase();
 
