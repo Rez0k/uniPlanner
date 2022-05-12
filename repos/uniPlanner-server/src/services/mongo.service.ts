@@ -29,10 +29,14 @@ export class MongoService {
       await MongoService.mongo_client.connect();
 
       const result = await MongoService.mongo_client
-        .db('uniplanner').collection(collection).findOne({ course_number: number });
+        .db('uniplanner')
+        .collection(collection)
+        .findOne({ course_number: number });
 
       if (result) {
-        Logger.debug(`Found a listing in the collection: '${collection}' with the number '${number}': ${result}`);
+        Logger.debug(
+          `Found a listing in the collection: '${collection}' with the number '${number}': ${result}`,
+        );
         return result;
       } else {
         Logger.debug(`No listings found with the number '${number}'`);
@@ -51,7 +55,9 @@ export class MongoService {
       await MongoService.mongo_client.connect();
       const result = await MongoService.mongo_client
         .db('uniplanner')
-        .collection(collection).find().toArray();
+        .collection(collection)
+        .find()
+        .toArray();
       if (result) {
         Logger.debug(`Found a listing in the collection: '${collection}'`);
         Logger.debug(JSON.stringify(result));
@@ -69,7 +75,11 @@ export class MongoService {
     }
   }
 
-  async updateItemByCourseNumber(collection: string, number: string, item: any) {
+  async updateItemByCourseNumber(
+    collection: string,
+    number: string,
+    item: any,
+  ) {
     try {
       await MongoService.mongo_client.connect();
       const result = await MongoService.mongo_client
@@ -133,10 +143,14 @@ export class MongoService {
       await MongoService.mongo_client.connect();
 
       const result = await MongoService.mongo_client
-        .db('uniplanner').collection(collection).findOne({ username: name });
+        .db('uniplanner')
+        .collection(collection)
+        .findOne({ username: name });
 
       if (result) {
-        Logger.debug(`Found a listing in the collection: '${collection}' with the name '${name}': ${result}`);
+        Logger.debug(
+          `Found a listing in the collection: '${collection}' with the name '${name}': ${result}`,
+        );
         return result;
       } else {
         Logger.debug(`No listings found with the name '${name}'`);
@@ -155,10 +169,15 @@ export class MongoService {
       await MongoService.mongo_client.connect();
 
       const result = await MongoService.mongo_client
-        .db('uniplanner').collection(collection).find({ username: user , password: pass}).toArray();
-        Logger.log(result.length);
-      if (JSON.stringify(result) != "[]") {
-        Logger.debug(`Found a listing in the collection: '${collection}' with the name '${user}': ${result}`);
+        .db('uniplanner')
+        .collection(collection)
+        .find({ username: user, password: pass })
+        .toArray();
+      Logger.log(result.length);
+      if (JSON.stringify(result) != '[]') {
+        Logger.debug(
+          `Found a listing in the collection: '${collection}' with the name '${user}': ${result}`,
+        );
         return true;
       } else {
         Logger.debug(`No listings found with the name '${user}'`);
@@ -178,10 +197,15 @@ export class MongoService {
       await MongoService.mongo_client.connect();
 
       const result = await MongoService.mongo_client
-        .db('uniplanner').collection(collection).find({ username: user }).toArray();
-        Logger.log(result.length);
-      if (JSON.stringify(result) != "[]") {
-        Logger.debug(`Found a listing in the collection: '${collection}' with the name '${user}': ${result}`);
+        .db('uniplanner')
+        .collection(collection)
+        .find({ username: user })
+        .toArray();
+      Logger.log(result.length);
+      if (JSON.stringify(result) != '[]') {
+        Logger.debug(
+          `Found a listing in the collection: '${collection}' with the name '${user}': ${result}`,
+        );
         return true;
       } else {
         Logger.debug(`No listings found with the name '${user}'`);
@@ -202,10 +226,14 @@ export class MongoService {
       await MongoService.mongo_client.connect();
 
       const result = await MongoService.mongo_client
-        .db('uniplanner').collection(collection).findOne({ username: name });
+        .db('uniplanner')
+        .collection(collection)
+        .findOne({ username: name });
 
       if (result) {
-        Logger.debug(`Found a listing in the collection: '${collection}' with the name '${name}': ${result}`);
+        Logger.debug(
+          `Found a listing in the collection: '${collection}' with the name '${name}': ${result}`,
+        );
         return result;
       } else {
         Logger.debug(`No listings found with the name '${name}'`);
@@ -245,15 +273,40 @@ export class MongoService {
       const result = await MongoService.mongo_client
         .db('uniplanner')
         .collection(collection)
-        .find({ username: name , courses: item });
-        return result;
-      Logger.debug(
-        `${result} document(s) matched the query criteria.`,
-      );
+        .find({ username: name, courses: item });
+      return result;
+      Logger.debug(`${result} document(s) matched the query criteria.`);
       Logger.debug(`${result} document(s) was/were updated.`);
     } catch (error) {
       Logger.error(
         `Failed to update item to collection ${collection} with error: ${error}`,
+      );
+    } finally {
+      MongoService.mongo_client.close();
+    }
+  }
+
+  async isItemExistByName(collection: string, name: string): Promise<boolean> {
+    try {
+      await MongoService.mongo_client.connect();
+
+      const result = await MongoService.mongo_client
+        .db('uniplanner')
+        .collection(collection)
+        .find({ username: name }).toArray();
+
+      if (JSON.stringify(result) !== "[]") {
+        Logger.debug(
+          `Found a listing in the collection: '${collection}' with the name '${name}': ${result}`,
+        );
+        return true;
+      } else {
+        Logger.debug(`No listings found with the name '${name}'`);
+        return false;
+      }
+    } catch (error) {
+      Logger.error(
+        `Failed to get item from collection ${collection} with error: ${error}`,
       );
     } finally {
       MongoService.mongo_client.close();
