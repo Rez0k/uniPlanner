@@ -1,9 +1,8 @@
-<p>courses-row works!</p>
 <div *ngIf="this.curriculumDetails">
     <div fxLayout="row" fxLayoutGap="5px">
         <input matInput placeholder="סמסטר" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Semester'>
         <input matInput placeholder="שנה"  type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Year'>
-        <input matInput placeholder="מספר קורס"  type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.CourseNumber'>
+        <input matInput placeholder="מספר קורס"  type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Course_number'>
         <div>
             <input type="text" matInput [formControl]="coursesControl" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">

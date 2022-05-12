@@ -11,10 +11,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button'
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
+import { CoursesPageComponent } from './modules/components/courses-page/courses-page.component';
+import { CourseModalComponent } from './modules/components/course-modal/course-modal.component';
 import { LoginComponent } from './modules/components/login/login.component';
 import { UserComponent } from './modules/components/user/user.component';
 import { CoursesTableComponent } from './modules/components/courses/courses-table/courses-table.component';
@@ -26,7 +29,8 @@ import { SettingsComponent } from './modules/components/settings/settings.compon
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'courses-page', component: CoursesPageComponent}
 ];
 
 @NgModule({
@@ -34,6 +38,8 @@ const routes: Routes = [
     AppComponent,
     CoursesTableComponent,
     CoursesRowComponent,
+    CoursesPageComponent,
+    CourseModalComponent,
     LoginComponent,
     UserComponent,
     RegisterComponent,
@@ -51,6 +57,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    MatDialogModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],

@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+
   }
 
   /**
@@ -38,9 +39,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     //start checking is user is valid
     if(this.user.username && this.user.password) {
   		this.loginService.validateLogin(this.user).subscribe(result => {
-        this.route.navigate(['courses-table']);
-        this.loginValid = true;
-        console.log('result is ', result);
+        if (result) {
+          this.route.navigate(['courses-page']);
+          this.loginValid = true;
+        }
+        else {
+          this.loginValid = false;
+        }
 
       }, error => {
         this.loginValid = false;

@@ -11,12 +11,12 @@ export class LoginService {
 	constructor(private http: HttpClient) { }
 
 	validateLogin(user: User){
-		return this.http.get(`${Consts.apiUrl}users/validateLogin?username=${user.username}&password=${user.password}`);
+		return this.http.get(`${Consts.baseUrl}api/users/validate?username=${user.username}&password=${user.password}`);
 	}
 
   //get all users from db
   getAll() {
-    return this.http.get<User[]>(Consts.apiUrl);
+    return this.http.get<User[]>(Consts.baseUrl);
   }
 
   //register a new user to the db

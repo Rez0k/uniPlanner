@@ -26,7 +26,7 @@ export class CourseController {
             const courses: Course[] = await this.mongoService.getAllByCollection("courses") as any;
             return courses;
         } catch (error) {
-            Logger.error(`Failed getting course by id, error: ${error}`)
+            Logger.error(`Failed getting all courses data, error: ${error}`)
             throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -1,5 +1,5 @@
-<p>courses-table works!</p>
-<app-courses-row></app-courses-row>
-
-<app-login></app-login>
-
+<div fxLayout="column" fxLayoutGap="5px">
+    <div *ngFor="let row of curriculumDetails">
+        <app-courses-row [curriculumDetails]="row" [courses]="courses"></app-courses-row>
+    </div>
+</div>
