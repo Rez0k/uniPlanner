@@ -2,18 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormsModule } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-
-import { Consts } from 'src/app/modules/consts/consts';
-
 import { Course } from 'src/app/modules/models/course';
 import { CurriculumDetailsModel } from 'src/app/modules/models/curriculumDetails';
 
 @Component({
-  selector: 'app-courses-row',
+  selector: '[app-courses-row]',
   templateUrl: './courses-row.component.html',
   styleUrls: ['./courses-row.component.scss']
 })
 export class CoursesRowComponent implements OnInit {
+
   @Input() public curriculumDetails: CurriculumDetailsModel | undefined;
 
   @Input() public courses: Course[] = [];

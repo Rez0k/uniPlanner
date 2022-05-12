@@ -3,6 +3,7 @@ import { CoursesRowComponent } from '../courses-row/courses-row.component';
 
 import { Course } from 'src/app/modules/models/course';
 import { CoursesService } from 'src/app/modules/services/courses.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -17,11 +18,25 @@ export class CoursesTableComponent implements OnInit {
 
   public curriculumDetails: any[] = [];
 
+  public coursesSubscription!: Subscription;
+
+  public tableColumns: string[] = [
+    'סמסטר', 
+    'שנה', 
+    'מספר קורס', 
+    'שם קורס',
+    'נקז',
+    'רמה',
+    'ציון',
+    'סטטוס',
+    'סוג'
+  ];
+
   constructor(readonly coursesService: CoursesService,) { }
 
   ngOnInit(): void 
   {
-    this.coursesService.getAllCourses()
+    this.coursesSubscription = this.coursesService.getAllCourses()
       .subscribe((rows: any) => this.courses = rows      );
 
     this.curriculumDetails=[
@@ -29,7 +44,7 @@ export class CoursesTableComponent implements OnInit {
         Semester:  1,
         Year: 2022,
         Name: 'infi',
-        CourseNumber: 0,
+        Course_number: 0,
         Points:  0,
         Level:  0,
         Type: '',
@@ -41,7 +56,7 @@ export class CoursesTableComponent implements OnInit {
         Semester:  0,
         Year: 0,
         Name: '',
-        CourseNumber: 0,
+        Course_number: 0,
         Points:  0,
         Level:  0,
         Type: '',
@@ -53,4 +68,21 @@ export class CoursesTableComponent implements OnInit {
 
   }
 
+  public add()
+  {    
+    this.curriculumDetails.push({  Semester:  0,
+      Year: 0,
+      Name: '',
+      Course_number: 0,
+      Points:  0,
+      Level:  0,
+      Type: '',
+      Grade:  0,
+      Status: '',
+      UserName:  '',});
+  }
+
+  ngOnDestroy() {
+    this.coursesSubscription?.unsubscribe();
+  }
 }
