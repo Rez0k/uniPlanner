@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CoursesRowComponent } from '../courses-row/courses-row.component';
-
-import { Course } from 'src/app/modules/models/course';
 import { CoursesService } from 'src/app/modules/services/courses.service';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { CourseModalComponent } from '../course-modal/course-modal.component';
 
 
 @Component({
@@ -21,9 +20,9 @@ export class CoursesTableComponent implements OnInit {
   public coursesSubscription!: Subscription;
 
   public tableColumns: string[] = [
-    'סמסטר', 
-    'שנה', 
-    'מספר קורס', 
+    'סמסטר',
+    'שנה',
+    'מספר קורס',
     'שם קורס',
     'נקז',
     'רמה',
@@ -32,54 +31,58 @@ export class CoursesTableComponent implements OnInit {
     'סוג'
   ];
 
-  constructor(readonly coursesService: CoursesService,) { }
+  constructor(readonly coursesService: CoursesService, public dialog: MatDialog) { }
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
     this.coursesSubscription = this.coursesService.getAllCourses()
-      .subscribe((rows: any) => this.courses = rows      );
+      .subscribe((rows: any) => this.courses = rows);
 
-    this.curriculumDetails=[
+    this.curriculumDetails = [
       {
-        Semester:  1,
+        Semester: 1,
         Year: 2022,
         Name: 'infi',
         Course_number: 0,
-        Points:  0,
-        Level:  0,
+        Points: 0,
+        Level: 0,
         Type: '',
-        Grade:  0,
+        Grade: 0,
         Status: '',
-        UserName:  '0',
+        UserName: '0',
       },
       {
-        Semester:  0,
+        Semester: 0,
         Year: 0,
         Name: '',
         Course_number: 0,
-        Points:  0,
-        Level:  0,
+        Points: 0,
+        Level: 0,
         Type: '',
-        Grade:  0,
+        Grade: 0,
         Status: '',
-        UserName:  'dsd',
+        UserName: 'dsd',
       },
-    ]  
+    ]
 
   }
 
-  public add()
-  {    
-    this.curriculumDetails.push({  Semester:  0,
+  public add() {
+    this.curriculumDetails.push({
+      Semester: 0,
       Year: 0,
       Name: '',
       Course_number: 0,
-      Points:  0,
-      Level:  0,
+      Points: 0,
+      Level: 0,
       Type: '',
-      Grade:  0,
+      Grade: 0,
       Status: '',
-      UserName:  '',});
+      UserName: '',
+    });
+  }
+
+  openDialog() {
+    this.dialog.open(CourseModalComponent);
   }
 
   ngOnDestroy() {
