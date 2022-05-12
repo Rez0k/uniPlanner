@@ -1,19 +1,21 @@
 <p>courses-row works!</p>
-<div *ngIf="this.curriculumDetailsModel">
+<div *ngIf="this.curriculumDetails">
     <div fxLayout="row" fxLayoutGap="5px">
-        <input matInput placeholder="סמסטר" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetailsModel.Semester' >
-        <input matInput placeholder="שנה"  type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetailsModel.Year' >
+        <input matInput placeholder="סמסטר" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Semester'>
+        <input matInput placeholder="שנה"  type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Year'>
+        <input matInput placeholder="מספר קורס"  type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.CourseNumber'>
         <div>
             <input type="text" matInput [formControl]="coursesControl" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                <mat-option *ngFor="let option of filteredOptions | async" (onSelectionChange)="choosedCourse(option)" [value]="option">
                     {{option.Name}}
                 </mat-option>
             </mat-autocomplete>
         </div>
-        <input matInput placeholder="נקז" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetailsModel.Points' >
-        <input matInput placeholder="רמה" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetailsModel.Level' >
-        <input matInput placeholder="ציון" type="number" ng-pattern="/^[0-9]+$/"  [(ngModel)]='this.curriculumDetailsModel.Grade' >
-        <input matInput placeholder="סטטוס"  [(ngModel)]='this.curriculumDetailsModel.Status'>
+        <input matInput placeholder="נקז" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Points'>
+        <input matInput placeholder="רמה" type="number" ng-pattern="/^[0-9]+$/" [(ngModel)]='this.curriculumDetails.Level'>
+        <input matInput placeholder="ציון" type="number" ng-pattern="/^[0-9]+$/"  [(ngModel)]='this.curriculumDetails.Grade'>
+        <input matInput placeholder="סטטוס"  [(ngModel)]='this.curriculumDetails.Status'>
+        <input matInput placeholder="סוג"  [(ngModel)]='this.curriculumDetails.Type'>   
     </div>
 </div>
