@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatIconModule } from '@angular/material/icon';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -61,6 +62,7 @@ const routes: Routes = [
     MatButtonModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    MatIconModule,
     FormsModule,
     MatToolbarModule,
     ReactiveFormsModule,

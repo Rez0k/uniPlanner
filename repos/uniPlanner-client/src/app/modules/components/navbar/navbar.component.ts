@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { LoginComponent } from '../login/login.component';
 
@@ -9,10 +10,17 @@ import { LoginComponent } from '../login/login.component';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() {
+  constructor(private route: Router) {
    }
 
   ngOnInit(): void {
   }
 
+  toCourses() {
+    this.route.navigate(['courses-page']);
+  }
+
+  logout(){
+    this.route.navigate(['login']);
+  }
 }
