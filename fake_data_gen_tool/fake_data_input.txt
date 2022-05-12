@@ -1,6 +1,6 @@
 export class Course 
 {
-    Id?: string = '';
+    Id: string = '';
     CourseNumber: number = 0;
     Name: string = '';
     Points: number = 0;

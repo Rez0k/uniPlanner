@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-content>
+    <form #registerForm="ngForm" (ngSubmit)="addToken()">
+      <!-- TOKEN INPUT -->
+      <mat-form-field>
+        <input matInput type="token" placeholder="Token" [(ngModel)]="user!.token" name="token" required>
+        <mat-error>
+          Please provide a valid token
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Add</button>
+    </form>
+  </mat-card-content>
+</mat-card>

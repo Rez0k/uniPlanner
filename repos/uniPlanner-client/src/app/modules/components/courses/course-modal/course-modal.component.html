@@ -1,0 +1,36 @@
+<div style="direction: rtl;">
+    <h2 mat-dialog-title style="text-align: center;">הוסף קורס</h2>
+    <hr> <br>
+    <form [formGroup]="form" (ngSubmit)="addCourse()">
+        <mat-dialog-content class="mat-typography">
+            <span class="modalLabel">הכנס שם קורס: </span>
+            <mat-form-field>
+                <input matInput formControlName="courseName">
+            </mat-form-field> <br>
+            <span class="modalLabel">הכנס מספר קורס:</span>
+            <mat-form-field>
+                <input matInput formControlName="courseNumber">
+            </mat-form-field> <br>
+            <span class="modalLabel">הכנס סוג קורס:</span>
+            <mat-form-field>
+                <input matInput formControlName="courseType">
+            </mat-form-field> <br>
+            <span class="modalLabel">הכנס מספר נק"ז:</span>
+            <mat-form-field>
+                <input matInput formControlName="coursePoints">
+            </mat-form-field> <br>
+            <span class="modalLabel">הכנס רמת קורס:</span>
+            <mat-form-field>
+                <input matInput formControlName="courseLevel">
+            </mat-form-field> <br>
+            <span class="modalLabel">הכנס דרישות לקורס:</span>
+            <mat-form-field>
+                <input matInput formControlName="courseRequirements">
+            </mat-form-field> <br>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button mat-button mat-dialog-close class="btn">סגור</button> &nbsp;
+            <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn">שמור</button>
+        </mat-dialog-actions>
+    </form>
+</div>
