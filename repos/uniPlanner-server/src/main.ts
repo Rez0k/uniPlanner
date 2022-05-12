@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
 
-  const uri = "mongodb+srv://uniplanner:onDKVYICf0o1RsQq@cluster0.ifbdh.mongodb.net/uniplanner?retryWrites=true&w=majority&socketTimeoutMS=90000";
+  const uri = "mongodb://localhost:27017/";
   const client = new MongoClient(uri);
 
   try {
