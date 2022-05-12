@@ -4,8 +4,8 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
 import { Consts } from 'src/app/modules/consts/consts';
-import { Course } from 'src/app/modules/models/course';
 
+import { Course } from 'src/app/modules/models/course';
 import { CurriculumDetailsModel } from 'src/app/modules/models/curriculumDetails';
 
 @Component({
@@ -16,7 +16,7 @@ import { CurriculumDetailsModel } from 'src/app/modules/models/curriculumDetails
 export class CoursesRowComponent implements OnInit {
   @Input() public curriculumDetails: CurriculumDetailsModel | undefined;
 
-  @Input() private options: Course[] = [];
+  @Input() public courses: Course[] = [];
 
   public coursesControl = new FormControl();
 
@@ -26,34 +26,11 @@ export class CoursesRowComponent implements OnInit {
 
   ngOnInit(): void
   {
-    this.curriculumDetails =
-    {
-      Semester:  0,
-      Year: 0,
-      Name: '',
-      CourseNumber: 0,
-      Points:  0,
-      Level:  0,
-      Type: '',
-      Grade:  0,
-      Status: '',
-      UserId:  0,
-    }
-
-    this.options = [
-      {
-        Id: '123',
-        CourseNumber: 64646,
-        Name: 'uriel',
-        Points:  5,
-        Type:  'damn',
-      }
-    ];
-
+    console.log(this.courses);
     this.filteredOptions = this.coursesControl.valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.Name)),
-      map(name => (name ? this._filter(name) : this.options.slice())),
+      map(name => (name ? this._filter(name) : this.courses.slice())),
     );
   }
 
@@ -63,10 +40,10 @@ export class CoursesRowComponent implements OnInit {
   }
 
   private _filter(name: string): Course[]
-  {
+  {    
     const filterValue = name.toLowerCase();
 
-    return this.options.filter(option => option.Name.toLowerCase().includes(filterValue));
+    return this.courses.filter(course => course.Name.toLowerCase().includes(filterValue));
   }
 
   public choosedCourse(course: any)
@@ -77,7 +54,7 @@ export class CoursesRowComponent implements OnInit {
     }
 
     this.curriculumDetails.Points = course.Points;
-    this.curriculumDetails.CourseNumber = course.CourseNumber;
+    this.curriculumDetails.Course_number = course.Course_number;
     this.curriculumDetails.Type = course.Type;
   }
 }

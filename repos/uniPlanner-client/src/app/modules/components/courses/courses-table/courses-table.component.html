@@ -1,20 +1,5 @@
-<p>courses-table works!</p>
-<!-- 
-<table>
-    <thead>
-        <span *ngFor="let head of this.displayedColumns">
-            {{head}}
-        </span>
-    </thead>
-    
-    <tbody>
-        <td *ngFor="let row of coursesRows">
-            dsad
-            <app-courses-row [curriculumDetailsModel]="row"></app-courses-row>
-        </td>
-    </tbody>
-</table> -->
-<app-courses-row></app-courses-row>
-
-<app-login></app-login>
-
+<div fxLayout="column" fxLayoutGap="5px">
+    <div *ngFor="let row of curriculumDetails">
+        <app-courses-row [curriculumDetails]="row" [courses]="courses"></app-courses-row>
+    </div>
+</div>
