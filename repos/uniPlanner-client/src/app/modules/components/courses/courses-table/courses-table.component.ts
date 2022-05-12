@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CoursesService } from '../../../services/courses/courses.service';
 import { CoursesRowComponent } from '../courses-row/courses-row.component';
-import { CurriculumDetailsModel } from '../../../models/curriculumDetails';
 
 import { Course } from 'src/app/modules/models/course';
-import { CurriculumDetailsModel } from 'src/app/modules/models/curriculumDetails';
 import { CoursesService } from 'src/app/modules/services/courses.service';
+
 
 @Component({
   selector: 'app-courses-table',
@@ -14,18 +12,6 @@ import { CoursesService } from 'src/app/modules/services/courses.service';
 })
 
 export class CoursesTableComponent implements OnInit {
-  public coursesRows: CurriculumDetailsModel[] = [];
-  public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-
-  private updateAllCourses(): void {
-    this.coursesRows[0] = new CurriculumDetailsModel();
-    console.log(this.coursesRows);
-    console.log("DONE");
-    return;
-
-    this.coursesService.getAll()
-      .subscribe((rows) => this.coursesRows = rows);
-  }
 
   public courses: any[] = [];
 
@@ -36,9 +22,7 @@ export class CoursesTableComponent implements OnInit {
   ngOnInit(): void 
   {
     this.coursesService.getAllCourses()
-      .subscribe((rows) => {this.courses = rows;
-      console.log('courses', this.courses);
-      });
+      .subscribe((rows: any) => this.courses = rows      );
 
     this.curriculumDetails=[
       {
