@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-content>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Register</h2>
+      <!-- USERNAME INPUT -->
+      <mat-form-field>
+        <input matInput placeholder="Username" [(ngModel)]="user!.username" name="username" required>
+        <mat-error>
+          Please provide a valid username
+        </mat-error>
+      </mat-form-field>
+      <!-- PASSWORD INPUT -->
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" [(ngModel)]="user!.password" name="password" required>
+        <mat-error>
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+      <!-- FIRSTNAME INPUT -->
+      <mat-form-field>
+        <input matInput placeholder="First Name" [(ngModel)]="user!.firstName" name="firstName" required>
+        <mat-error>
+          Enter your first name
+        </mat-error>
+      </mat-form-field>
+      <!-- LASTNAME INPUT -->
+      <mat-form-field>
+        <input matInput placeholder="Last Name" [(ngModel)]="user!.lastName" name="lastName" required>
+        <mat-error>
+          Enter your last name
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>

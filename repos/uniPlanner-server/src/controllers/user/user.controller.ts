@@ -16,4 +16,15 @@ export class UserController {
             throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Get('validateLogin')
+    userLogin(): boolean {
+        try {
+            Logger.log('Got request to get data');
+            return true;
+        } catch (error) {
+            Logger.error(`Failed getting user data, error: ${error}`)
+            throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -11,13 +11,13 @@ export class LoginComponent implements OnInit {
 
   public user: User = {
     username: '',
-    password: ''
+    password: '',
   };
   public loginValid: boolean = true;
 
   constructor(private loginService: LoginService) {
 
-   }
+  }
 
   public ngOnInit(): void {
   }
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   		this.loginService.validateLogin(this.user).subscribe(result => {
         this.loginValid = true;
         console.log('result is ', result);
+
       }, error => {
         this.loginValid = false;
         console.log('error is ', error);
