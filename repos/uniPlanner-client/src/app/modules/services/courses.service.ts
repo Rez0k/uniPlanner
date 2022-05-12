@@ -18,4 +18,8 @@ export class CoursesService {
 		return this.http.get(`${Consts.baseUrl}api/courses/allCourses`);
 	}
 
+  postCourse(course: Course): Observable<any>
+	{    
+		return this.http.post(`${Consts.baseUrl}api/courses/saveCourse`, course);
+	}
 }

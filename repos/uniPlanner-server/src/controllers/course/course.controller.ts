@@ -7,7 +7,7 @@ export class CourseController {
 
     constructor(readonly mongoService: MongoService) {}
 
-    @Post('SaveCourse')
+    @Post('saveCourse')
     async saveItemByCollection(@Body() course): Promise<string> {
         try {
             Logger.log('Post request to post course data to collection');
