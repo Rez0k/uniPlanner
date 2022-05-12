@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
@@ -14,17 +14,19 @@ import { CurriculumDetailsModel } from 'src/app/modules/models/curriculumDetails
   styleUrls: ['./courses-row.component.scss']
 })
 export class CoursesRowComponent implements OnInit {
-  @Input() curriculumDetailsModel: CurriculumDetailsModel | undefined;
+  @Input() public curriculumDetails: CurriculumDetailsModel | undefined;
+
+  @Input() private options: Course[] = [];
 
   public coursesControl = new FormControl();
-  private options: Course[] = [];
+
   public filteredOptions: Observable<Course[]> | undefined;
 
   constructor() { }
 
-  ngOnInit(): void 
-  {    
-    this.curriculumDetailsModel = 
+  ngOnInit(): void
+  {
+    this.curriculumDetails =
     {
       Semester:  0,
       Year: 0,
@@ -40,15 +42,14 @@ export class CoursesRowComponent implements OnInit {
 
     this.options = [
       {
-        Id: '',
-        CourseNumber: 0,
+        Id: '123',
+        CourseNumber: 64646,
         Name: 'uriel',
-        Points:  0,
-        Type:  '',
+        Points:  5,
+        Type:  'damn',
       }
     ];
-    console.log(this.options);
-    
+
     this.filteredOptions = this.coursesControl.valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.Name)),
@@ -56,18 +57,27 @@ export class CoursesRowComponent implements OnInit {
     );
   }
 
-  public displayFn(course: Course): string 
+  public displayFn(course: Course): string
   {
     return course && course.Name ? course.Name : '';
   }
 
-  private _filter(name: string): Course[] 
+  private _filter(name: string): Course[]
   {
-    console.log(name);
-
     const filterValue = name.toLowerCase();
 
     return this.options.filter(option => option.Name.toLowerCase().includes(filterValue));
   }
 
+  public choosedCourse(course: any)
+  {
+    if (!course || !this.curriculumDetails)
+    {
+      return;
+    }
+
+    this.curriculumDetails.Points = course.Points;
+    this.curriculumDetails.CourseNumber = course.CourseNumber;
+    this.curriculumDetails.Type = course.Type;
+  }
 }
