@@ -179,7 +179,7 @@ export class MongoService {
 
       const result = await MongoService.mongo_client
         .db('uniplanner').collection(collection).find({ username: user }).toArray();
-        Logger.log(result.length);
+        Logger.log(JSON.stringify(result));
       if (JSON.stringify(result) != "[]") {
         Logger.debug(`Found a listing in the collection: '${collection}' with the name '${user}': ${result}`);
         return true;
