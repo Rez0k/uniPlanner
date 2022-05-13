@@ -13,7 +13,7 @@
     </th>
     <th>
         <div>
-            <input type="text" matInput [formControl]="coursesControl" [matAutocomplete]="auto">
+            <input type="text" matInput value='this.curriculumDetails.Name' [formControl]="coursesControl" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let option of filteredOptions | async" (onSelectionChange)="choosedCourse(option)"
                     [value]="option">

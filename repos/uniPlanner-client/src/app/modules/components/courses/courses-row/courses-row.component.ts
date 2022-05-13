@@ -27,8 +27,12 @@ export class CoursesRowComponent implements OnInit {
     this.filteredOptions = this.coursesControl.valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.Name)),
-      map(name => (name ? this._filter(name) : this.courses.slice())),
+      map(name => (name ? this._filter(name) : this.courses.slice()))
     );
+  }
+
+  ngAfterContentInit() {
+    this.coursesControl.setValue({ Name: this.curriculumDetails?.Name });
   }
 
   public displayFn(course: Course): string
@@ -49,7 +53,7 @@ export class CoursesRowComponent implements OnInit {
     {
       return;
     }
-
+    
     this.curriculumDetails.Name = course.Name;
     this.curriculumDetails.Points = course.Points;
     this.curriculumDetails.Course_number = course.Course_number;
