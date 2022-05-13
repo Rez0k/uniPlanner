@@ -21,10 +21,10 @@ export class CurriculumController {
     }
 
     @Get('search/:username')
-    async getCurriculumByName(@Param() params): Promise<Curriculum[]> {
+    async getCurriculumByName(@Param() params): Promise<Curriculum> {
         try {
             Logger.log('Got request to get user data from collection');
-            const curri: Curriculum[] = await this.mongoService.getCurriculumByName("curriculum",params.username) as any;
+            const curri: Curriculum = await this.mongoService.getCurriculumByName("curriculum", params.username) as any;
             return curri;
         } catch (error) {
             Logger.error(`Failed getting curriculum by username ${params.username}, error: ${error}`)
