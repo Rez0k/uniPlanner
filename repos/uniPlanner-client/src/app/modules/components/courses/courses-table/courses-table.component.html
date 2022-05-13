@@ -19,8 +19,8 @@
                 <th>
                     <button mat-raised-button (click)="save()">שמירה</button>
                 </th>
-                <th>
-                    ממוצע : {{average}}
+                <th *ngIf="curriculumDetails.length !== 0" >
+                    ממוצע : {{average | number : '.2-2'}}
                 </th>
             </tr>
         </tbody>
