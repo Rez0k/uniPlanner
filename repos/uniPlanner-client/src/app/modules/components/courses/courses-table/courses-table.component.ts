@@ -51,6 +51,10 @@ export class CoursesTableComponent implements OnInit {
         this.curriculumGetSubscription = this.curriculumService.getCurriculumByUser(Consts.userName)
           .subscribe((rows: any) =>{
             this.curriculumDetails = rows?.courses || [];
+            
+            this.curriculumDetails .sort(function (a, b) {
+              return  b.Year === a.Year ?  b.Semester - a.Semester : b.Year - a.Year;
+            });
             this.average = this.calculateAverage(rows);
       });
        });
@@ -89,7 +93,7 @@ export class CoursesTableComponent implements OnInit {
     var total = 0;
     for (const course of curri.courses) {
       total += (+course.Points * +course.Grade);
-      pcounter += course.Points;
+      pcounter += +course.Points;
 
     }
     return(total/pcounter);
