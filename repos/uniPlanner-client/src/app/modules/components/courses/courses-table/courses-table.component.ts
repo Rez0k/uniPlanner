@@ -60,15 +60,15 @@ export class CoursesTableComponent implements OnInit {
     console.log("add");
 
     this.curriculumDetails?.push({
-      Semester: 0,
-      Year: 0,
+      Semester: 1,
+      Year: + new Date().getFullYear(),
       Name: '',
-      Course_number: 0,
+      Course_number: 1000,
       Points: 0,
       Level: 0,
-      Type: '',
+      Type: 'חובה',
       Grade: 0,
-      Status: '',
+      Status: 'עתידי',
       UserName: '',
     });
   }

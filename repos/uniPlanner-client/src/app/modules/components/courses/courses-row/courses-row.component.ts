@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { Course } from 'src/app/modules/models/course';
@@ -49,8 +49,7 @@ export class CoursesRowComponent implements OnInit {
 
   public choosedCourse(course: any)
   {
-    if (!course || !this.curriculumDetails)
-    {
+    if (!course || !this.curriculumDetails) {
       return;
     }
     
@@ -58,5 +57,15 @@ export class CoursesRowComponent implements OnInit {
     this.curriculumDetails.Points = course.Points;
     this.curriculumDetails.Course_number = course.Course_number;
     this.curriculumDetails.Type = course.Type;
+    this.curriculumDetails.Grade = course.Grade;
+    this.curriculumDetails.Status = course.Status;
+  }
+
+  gradeChanged() {
+    if (this.curriculumDetails!.Grade >= 60) {
+      this.curriculumDetails!.Status = 'עובר'
+    } else {
+      this.curriculumDetails!.Status = 'נכשל'
+    }
   }
 }
