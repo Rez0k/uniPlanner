@@ -58,7 +58,6 @@ export class CurriculumController {
                 Logger.log(`Post request to post curriculum ${curri} data to collection`);
                 await this.mongoService.saveItemByCollection("curriculum",  curri);
             }
-
             return `Curriculum ${curriData.username} inserted successfully`;
         } catch (error) {
             Logger.error(`Failed to put data, error: ${error}`)

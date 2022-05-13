@@ -40,7 +40,7 @@ export class CoursesRowComponent implements OnInit {
   {    
     const filterValue = name.toLowerCase();
 
-    return this.courses.filter(course => course.Name.toLowerCase().includes(filterValue));
+    return this.courses.filter(course => course.Name?.toLowerCase().includes(filterValue));
   }
 
   public choosedCourse(course: any)
