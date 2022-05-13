@@ -24,6 +24,7 @@ export class CoursesTableComponent implements OnInit {
 
   public curriculumSubscription!: Subscription;
   public curriculumGetSubscription!: Subscription;
+  public average: number = 0;
 
 
 
@@ -48,7 +49,9 @@ export class CoursesTableComponent implements OnInit {
       .subscribe((rows: any) => {
         this.courses = rows;
         this.curriculumGetSubscription = this.curriculumService.getCurriculumByUser(Consts.userName)
-          .subscribe((rows: any) =>{ this.curriculumDetails = rows?.courses || []; console.log(rows);
+          .subscribe((rows: any) =>{
+            this.curriculumDetails = rows?.courses || [];
+            this.average = this.calculateAverage(rows);
       });
        });
   }
@@ -77,6 +80,20 @@ export class CoursesTableComponent implements OnInit {
   public save()
   {
     this.curriculumSubscription = this.curriculumService.postCurriculum(Consts.userName, this.curriculumDetails).subscribe();
+  }
+
+  public calculateAverage(curri: any){
+    var pcounter = 0;
+    var total = 0;
+    for (const course of curri.courses) {
+      console.log(course);
+      console.log(course.Points);
+      console.log(course.Grade);
+      total += (+course.Points * +course.Grade);
+      pcounter += course.Points;
+
+    }
+    return(total/pcounter);
   }
 
   ngOnDestroy() {

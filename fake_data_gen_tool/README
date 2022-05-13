@@ -1,4 +1,0 @@
-just copy and paste the model.ts file content to the input file the fake data will wait for you in fake_data_output.txt.
- 
-useges: py fake_data_gen.py <size-of-fake-data>
-you need to run this script in the fake_data_gen_tool folder.
