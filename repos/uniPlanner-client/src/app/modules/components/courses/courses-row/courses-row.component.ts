@@ -53,7 +53,7 @@ export class CoursesRowComponent implements OnInit {
     {
       return;
     }
-    
+
     this.curriculumDetails.Name = course.Name;
     this.curriculumDetails.Points = course.Points;
     this.curriculumDetails.Course_number = course.Course_number;
