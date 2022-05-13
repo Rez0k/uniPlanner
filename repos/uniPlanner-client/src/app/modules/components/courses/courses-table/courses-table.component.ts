@@ -49,7 +49,7 @@ export class CoursesTableComponent implements OnInit {
       .subscribe((rows: any) => {
         this.courses = rows;
         this.curriculumGetSubscription = this.curriculumService.getCurriculumByUser(Consts.userName)
-          .subscribe((rows: any) =>{ 
+          .subscribe((rows: any) =>{
             this.curriculumDetails = rows?.courses || [];
             this.average = this.calculateAverage(rows);
       });
@@ -91,7 +91,7 @@ export class CoursesTableComponent implements OnInit {
       console.log(course.Grade);
       total += (+course.Points * +course.Grade);
       pcounter += course.Points;
-      
+
     }
     return(total/pcounter);
   }

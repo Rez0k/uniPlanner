@@ -74,6 +74,7 @@ export class UserController {
             Logger.log('Post request to post user data to collection');
             await this.mongoService.saveItemByCollection("users",  userdata);
             return `User ${userdata.username} saved successfully`;
+
         } catch (error) {
             Logger.error(`Failed to post data, error: ${error}`)
             throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);
