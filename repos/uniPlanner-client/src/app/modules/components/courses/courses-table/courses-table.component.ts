@@ -51,7 +51,6 @@ export class CoursesTableComponent implements OnInit {
         this.curriculumGetSubscription = this.curriculumService.getCurriculumByUser(Consts.userName)
           .subscribe((rows: any) =>{ 
             this.curriculumDetails = rows?.courses || [];
-            console.log(rows?.courses)
             this.average = this.calculateAverage(rows);
       });
        });

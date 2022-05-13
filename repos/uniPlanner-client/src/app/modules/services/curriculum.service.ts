@@ -12,9 +12,7 @@ export class CurriculumService {
 	constructor(private http: HttpClient) { }
 
 	getCurriculumByUser(userName: string): Observable<any>
-	{    
-		console.log(userName);
-		
+	{
 		return this.http.get(`${Consts.baseUrl}api/curriculum/search/${userName}`);
 	}
 
