@@ -80,8 +80,8 @@ export class CoursesTableComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.coursesSubscription?.unsubscribe();
-    this.curriculumSubscription?.unsubscribe();
-    this.curriculumGetSubscription?.unsubscribe();
+    // this.coursesSubscription?.unsubscribe();
+    // this.curriculumSubscription?.unsubscribe();
+    // this.curriculumGetSubscription?.unsubscribe();
   }
 }

@@ -20,6 +20,6 @@ export class CurriculumService {
 
 	postCurriculum(userName: string, courses: any[]): Observable<any>
 	{
-		return this.http.post(`${Consts.baseUrl}api/curriculum/insert`, {courses: courses, username: userName});
+		return this.http.post(`${Consts.baseUrl}api/curriculum/insert`, {username: userName, courses: courses});
 	}
 }
