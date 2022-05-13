@@ -37,7 +37,7 @@ export class CoursesRowComponent implements OnInit {
   }
 
   private _filter(name: string): Course[]
-  {    
+  {
     const filterValue = name.toLowerCase();
 
     return this.courses.filter(course => course.Name?.toLowerCase().includes(filterValue));

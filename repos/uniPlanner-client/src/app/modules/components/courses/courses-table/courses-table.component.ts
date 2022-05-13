@@ -45,15 +45,17 @@ export class CoursesTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.coursesSubscription = this.coursesService.getAllCourses()
-      .subscribe((rows: any) => this.courses = rows);
-    this.curriculumGetSubscription = this.curriculumService.getCurriculumByUser(Consts.userName)
-      .subscribe((rows: any) =>{ this.curriculumDetails = rows?.courses || []; console.log(rows);
+      .subscribe((rows: any) => {
+        this.courses = rows;
+        this.curriculumGetSubscription = this.curriculumService.getCurriculumByUser(Consts.userName)
+          .subscribe((rows: any) =>{ this.curriculumDetails = rows?.courses || []; console.log(rows);
       });
+       });
   }
 
   public add() {
     console.log("add");
-    
+
     this.curriculumDetails?.push({
       Semester: 0,
       Year: 0,
@@ -73,7 +75,7 @@ export class CoursesTableComponent implements OnInit {
   }
 
   public save()
-  {    
+  {
     this.curriculumSubscription = this.curriculumService.postCurriculum(Consts.userName, this.curriculumDetails).subscribe();
   }
 
