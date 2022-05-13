@@ -1,5 +1,5 @@
 .mat-toolbar{
-  background-color: darkblue;
+  background-color: rgb(58, 146, 175);
   color: white;
 }
 .mat-button{
@@ -8,3 +8,10 @@
 .spacer{
   flex: 1 1 auto;
 }
+
+.text{
+  color: white;
+  font-size: 18px;
+  text-shadow: rgb(79, 78, 82) 10px 10px 10px;
+}
+
