@@ -3,7 +3,7 @@ import { Curriculum } from 'src/models/curriculum.model';
 import { User } from 'src/models/user.model';
 import { MongoService } from 'src/services/mongo.service';
 
-@Controller('curriculum')
+@Controller('api/curriculum')
 export class CurriculumController {
 
     constructor(readonly mongoService: MongoService) {}
@@ -20,11 +20,11 @@ export class CurriculumController {
         }
     }
 
-    @Get(':username')
-    async getCurriculumByName(@Param() params): Promise<Curriculum[]> {
+    @Get('search/:username')
+    async getCurriculumByName(@Param() params): Promise<Curriculum> {
         try {
             Logger.log('Got request to get user data from collection');
-            const curri: Curriculum[] = await this.mongoService.getCurriculumByName("curriculum",params.username) as any;
+            const curri: Curriculum = await this.mongoService.getCurriculumByName("curriculum", params.username) as any;
             return curri;
         } catch (error) {
             Logger.error(`Failed getting curriculum by username ${params.username}, error: ${error}`)
@@ -32,11 +32,11 @@ export class CurriculumController {
         }
     }
 
-    @Put(':username')
+    @Put('update/:username')
     async updateCurriculumByName(@Param() username, @Body() curridata): Promise<string> {
         try {
             Logger.log('Put request to update curriculum data to collection');
-            await this.mongoService.updateCurriculumByName("curriculum", username , curridata);
+            await this.mongoService.updateCurriculumByName("curriculum", username, curridata);
             return `Curriculum ${curridata.username} updated successfully`;
         } catch (error) {
             Logger.error(`Failed to put data, error: ${error}`)
@@ -44,12 +44,21 @@ export class CurriculumController {
         }
     }
 
-    @Put('insert/:username')
-    async insertToCurriculumByName(@Param() username, @Body() curridata): Promise<string> {
+    @Post('insert')
+    async insertToCurriculumByName(@Body() curriData): Promise<string> {
         try {
             Logger.log('Put request to update curriculum data to collection');
-            await this.mongoService.insertToCurriculumByName("curriculum", username , curridata);
-            return `Curriculum ${curridata.username} updated successfully`;
+            const curri: Curriculum = curriData;
+            const username: string = curriData.username;
+
+            if (await this.mongoService.isItemExistByName('curriculum', username)) {
+                Logger.log(`Put request to update curriculum ${curri} data to collection`);
+                await this.mongoService.updateCurriculumByName("curriculum", username, curri);
+            } else {
+                Logger.log(`Post request to post curriculum ${curri} data to collection`);
+                await this.mongoService.saveItemByCollection("curriculum",  curri);
+            }
+            return `Curriculum ${curriData.username} inserted successfully`;
         } catch (error) {
             Logger.error(`Failed to put data, error: ${error}`)
             throw new HttpException('Forbidden', HttpStatus.INTERNAL_SERVER_ERROR);

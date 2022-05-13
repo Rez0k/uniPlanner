@@ -42,6 +42,6 @@ export class CourseModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.coursesSubscription.unsubscribe();
+    this.coursesSubscription?.unsubscribe();
   }
 }

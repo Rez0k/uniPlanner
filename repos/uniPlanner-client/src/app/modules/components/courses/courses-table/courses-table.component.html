@@ -1,5 +1,25 @@
-<div fxLayout="column" fxLayoutGap="5px">
-    <div *ngFor="let row of curriculumDetails">
-        <app-courses-row [curriculumDetails]="row" [courses]="courses"></app-courses-row>
-    </div>
+
+<br><br>
+<div class="center">
+    <table color="primary">
+        <thead>
+            <tr>
+                <th class="table-cols" *ngFor="let col of tableColumns">{{ col }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr app-courses-row *ngFor="let row of curriculumDetails" [curriculumDetails]="row" [courses]="courses"></tr>
+
+            <tr>
+                <th attr.colspan="{{ tableColumns.length }}" style="text-align: center">
+                    <app-add-course-row (addEvent)="add()"></app-add-course-row>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <button mat-raised-button (click)="save()">שמירה</button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
 </div>
