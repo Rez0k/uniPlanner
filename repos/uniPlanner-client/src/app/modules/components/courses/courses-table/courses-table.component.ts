@@ -57,8 +57,6 @@ export class CoursesTableComponent implements OnInit {
   }
 
   public add() {
-    console.log("add");
-
     this.curriculumDetails?.push({
       Semester: 1,
       Year: + new Date().getFullYear(),
@@ -82,13 +80,14 @@ export class CoursesTableComponent implements OnInit {
     this.curriculumSubscription = this.curriculumService.postCurriculum(Consts.userName, this.curriculumDetails).subscribe();
   }
 
-  public calculateAverage(curri: any){
+  public calculateAverage(curri: any) {
+    if (!curri?.courses) {
+      return 0;
+    }
+
     var pcounter = 0;
     var total = 0;
     for (const course of curri.courses) {
-      console.log(course);
-      console.log(course.Points);
-      console.log(course.Grade);
       total += (+course.Points * +course.Grade);
       pcounter += course.Points;
 
